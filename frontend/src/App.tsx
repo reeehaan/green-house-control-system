@@ -1,36 +1,33 @@
 import './App.css';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import RegistrationForm from './Components/Forms/RegisterForm';
+import LoginForm from './Components/Forms/LoginForm';
+import { UserProfileForm } from './Components/Forms';
+import Layout from './Components/Common/Layout';
+import { LandingPage } from './Components/Common';
+import { LightControl } from './Components/Controls';
+import SoilMoistureControl from './Components/Controls/SoilMoistureControl';
+import WaterSupplyControl from './Components/Controls/WaterSupplyControl';
+import Dashboard from './Components/Dashboard/DashboardGrid';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gradient mb-8">
-            Smart Greenhouse Dashboard
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="sensor-card">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Temperature</h3>
-              <p className="text-3xl font-bold text-sensor-temperature">24°C</p>
-              <span className="badge-success">Normal</span>
-            </div>
-            <div className="sensor-card">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Humidity</h3>
-              <p className="text-3xl font-bold text-sensor-humidity">65%</p>
-              <span className="badge-success">Optimal</span>
-            </div>
-            <div className="sensor-card">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Light</h3>
-              <p className="text-3xl font-bold text-sensor-light">850 lux</p>
-              <span className="badge-warning">Low</span>
-            </div>
-          </div>
-          <button className="btn-primary mt-8">
-            View Full Dashboard
-          </button>
-        </div>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        {/* Authentication routes */}
+        <Route element={<Layout/>}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/register" element={<RegistrationForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route path="/profile" element={<UserProfileForm />} />
+          <Route path="/light" element={<LightControl />} />
+          <Route path="/soil-moisture" element={<SoilMoistureControl />} />
+          <Route path="/water-supply" element={<WaterSupplyControl />} />
+        </Route>
+        
+      </Routes>
+    </Router>
   );
 }
 
